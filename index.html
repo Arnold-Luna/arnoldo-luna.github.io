@@ -6,7 +6,7 @@
 <title>Arnoldo Luna | SOC Dashboard Portfolio</title>
 
 <style>
-* { box-sizing: border-box; scroll-behavior: smooth; }
+* { box-sizing: border-box; }
 
 :root {
   --bg: #05020f;
@@ -170,36 +170,6 @@ body::before {
   font-weight: 900;
 }
 
-/* METRICS */
-.metrics {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  margin-bottom: 22px;
-}
-
-.metric {
-  background: var(--panel2);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 18px;
-  min-height: 104px;
-}
-
-.metric small {
-  color: var(--muted);
-}
-
-.metric h3 {
-  margin: 8px 0 0;
-  font-size: 2rem;
-}
-
-.critical { color: var(--red); }
-.high { color: var(--orange); }
-.clean { color: var(--green); }
-.info { color: var(--cyan); }
-
 /* GRID */
 .soc-grid {
   display: grid;
@@ -222,6 +192,35 @@ body::before {
   font-size: .82rem;
   margin-bottom: 16px;
 }
+
+/* METRICS */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.metric {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.metric small {
+  color: var(--muted);
+}
+
+.metric h3 {
+  margin: 8px 0 0;
+  font-size: 2rem;
+}
+
+.critical { color: var(--red); }
+.high { color: var(--orange); }
+.clean { color: var(--green); }
+.info { color: var(--cyan); }
 
 /* LENTICULAR */
 .lenticular-wrapper { perspective: 1200px; }
@@ -437,6 +436,7 @@ body::before {
       <div class="actions">
         <a href="#projects">View Projects</a>
         <a href="mailto:Arnoldo.Luna@outlook.com">Contact</a>
+        <a href="resume.pdf" target="_blank">Resume</a>
       </div>
     </section>
 
@@ -445,20 +445,14 @@ body::before {
         <small>Certifications</small>
         <h3 class="clean">7+</h3>
       </div>
-
       <div class="metric">
         <small>Security Labs</small>
         <h3 class="info">6</h3>
       </div>
-
       <div class="metric">
         <small>Frameworks</small>
-        <h3 class="high" style="font-size:1.35rem;">NIST 800-53</h3>
-        <p style="color:#94a3b8; font-size:0.78rem; margin-top:8px;">
-          RMF | STIGs/SCAP | MITRE ATT&CK | ISO 27001
-        </p>
+        <h3 class="high">NIST</h3>
       </div>
-
       <div class="metric">
         <small>Status</small>
         <h3 class="clean">Ready</h3>
@@ -477,7 +471,7 @@ body::before {
 
       <div class="panel">
         <div class="panel-title">ANALYST TERMINAL</div>
-        <div class="terminal">
+        <div class="terminal" id="terminal">
           <p>&gt; Initializing analyst workspace...</p>
           <p>[OK] CySA+ loaded</p>
           <p>[OK] AWS cloud controls mapped</p>
@@ -526,8 +520,7 @@ body::before {
           <tr><td>SIEM</td><td>Splunk / Wazuh</td></tr>
           <tr><td>Network Defense</td><td>Suricata / Wireshark</td></tr>
           <tr><td>Cloud</td><td>AWS IAM / VPC</td></tr>
-          <tr><td>Compliance</td><td>NIST 800-53 / RMF / STIGs-SCAP / ISO 27001</td></tr>
-          <tr><td>Detection</td><td>MITRE ATT&CK</td></tr>
+          <tr><td>Compliance</td><td>RMF / NIST / STIG</td></tr>
           <tr><td>Automation</td><td>n8n / Python</td></tr>
         </table>
       </div>
@@ -574,12 +567,6 @@ body::before {
             <span class="tag">SERVERLESS</span>
           </div>
         </div>
-
-        <p style="margin-top:20px;">
-          <a href="https://github.com/Arnold-Luna/cybersecurity-projects" target="_blank" style="color:#00eaff; font-weight:900;">
-            View Full Cybersecurity Project Repository
-          </a>
-        </p>
       </div>
     </section>
 
@@ -588,7 +575,8 @@ body::before {
       <h2>Let’s Connect</h2>
       <p>Open to SOC Analyst, Cloud Security, Cybersecurity Analyst, and GRC opportunities.</p>
       <div class="actions">
-        <a href="https://github.com/Arnold-Luna/cybersecurity-projects" target="_blank">GitHub Portfolio</a>
+        <a href="https://github.com/Arnold-Lunaa" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
         <a href="mailto:Arnoldo.Luna@outlook.com">Email</a>
       </div>
     </section>
@@ -620,6 +608,7 @@ if (card) {
   });
 }
 
+// Fake live SOC feed timestamps
 const times = document.querySelectorAll(".time");
 let seconds = 1;
 
