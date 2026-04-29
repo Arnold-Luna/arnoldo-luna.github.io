@@ -1,76 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arnoldo Luna | Cloud Security Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arnoldo Luna | Cybersecurity Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+  <div class="noise"></div>
 
-    <header class="hero">
-    <h1>Arnoldo Luna</h1>
-    <p>Cybersecurity Analyst | Cloud Security | Governance, Risk & Compliance | Navy Veteran</p>
+  <header class="hero">
+    <nav class="nav">
+      <div class="logo">AL<span>SEC</span></div>
+      <div class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
 
-    <p class="hero-summary">
-        Securing cloud environments, supporting risk reduction, and bringing mission-focused leadership to modern security operations.
-    </p>
+    <section class="hero-grid">
+      <div class="hero-text">
+        <p class="eyebrow">ARNOLDO LUNA</p>
+        <h1>Cybersecurity Analyst <span>&</span><br />Cloud Security</h1>
 
-    <p class="hero-location">San Antonio, TX</p>
-
-    <div class="hero-buttons">
-        <a href="https://github.com/Arnold-Lunaa" target="_blank">GitHub</a>
-        <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
-        <a href="mailto:Arnoldo.Luna@outlook.com">Arnoldo.Luna@outlook.com</a>
-    </div>
-</header>
-
-    <section>
-        <h2>About Me</h2>
-        <p>
-           Navy Veteran and proven leader with 20 years of experience operating in high-pressure, mission-critical environments where accountability, teamwork, and decisive leadership drove successful outcomes every day. Bringing that same discipline into cybersecurity and cloud security, I focus on protecting systems, strengthening security posture, reducing operational risk, and supporting organizations through secure, resilient, and compliance-driven operations.
+        <p class="hero-summary">
+          Navy Veteran and cybersecurity professional focused on SIEM monitoring,
+          incident response, cloud security, RMF, NIST 800-53, DISA STIGs, and
+          risk-driven security operations.
         </p>
-        <p>
-            My hands-on experience includes AWS, SIEM monitoring, incident response, RMF, NIST 800-53, DISA STIG remediation, and enterprise security labs. I am especially interested in roles where I can contribute across cloud security, security operations, and governance, risk, and compliance while continuing to grow as a security professional.
-        </p>
-    </section>
 
-    <section>
-        <h2>Core Certifications</h2>
-        <div class="cards">
-            <div class="card">CompTIA CySA+</div>
-            <div class="card">CompTIA Security+</div>
-            <div class="card">CompTIA Cloud+</div>
-            <div class="card">CompTIA Security Analytics Professional (CSAP)</div>
-            <div class="card">CompTIA Secure Cloud Professional (CSCP)</div>
-            <div class="card">AWS Certified Cloud Practitioner</div>
-            <div class="card">Splunk Core Certified User</div>
-            <div class="card">Google Cybersecurity Professional Certificate</div>
-            <div class="card">Google Project Management Professional Certificate</div>
+        <div class="terminal">
+          <p>C:\Users\Arnoldo&gt; initializing security profile...</p>
+          <p>[OK] CySA+ certified</p>
+          <p>[OK] AWS cloud security ready</p>
+          <p>[OK] SIEM detection mindset loaded</p>
+          <p>[OK] Mission-first leadership online</p>
         </div>
-    </section>
 
-    <section>
-        <h2>Featured Projects</h2>
-        <div class="cards">
-            <div class="card">
-                <h3>Cloud-Native Security Alert Pipeline</h3>
-                <p>Built an event-driven workflow using EventBridge, Lambda, SQS, SNS, dead-letter queues, retry logic, and idempotency concepts to support resilient cloud-native alert handling.</p>
-            </div>
-            <div class="card">
-                <h3>Serverless Security Intake API</h3>
-                <p>Designed a serverless AWS application using API Gateway, Lambda, DynamoDB, Cognito, and WAF to support secure intake, tracking, and processing of security-related events.</p>
-            </div>
-            <div class="card">
-                <h3>Three-Tier AWS Enterprise Application</h3>
-                <p>Deployed a segmented AWS environment using VPC, ALB, EC2 Auto Scaling, RDS, and Session Manager to demonstrate secure architecture, private-tier design, and enterprise-style infrastructure controls.</p>
-            </div>
-            <div class="card">
-                <h3>Containerized Threat Intelligence Platform</h3>
-                <p>Built a containerized platform using ECS, Docker, ECR, ALB, task IAM roles, and centralized logging to demonstrate secure deployment of modular cloud services.</p>
-            </div>
+        <div class="tags">
+          <span>CySA+</span>
+          <span>Security+</span>
+          <span>Cloud+</span>
+          <span>AWS CCP</span>
+          <span>Splunk</span>
+          <span>RMF</span>
+          <span>STIG</span>
         </div>
+
+        <div class="buttons">
+          <a href="#projects" class="btn primary">View Projects</a>
+          <a href="mailto:Arnoldo.Luna@outlook.com" class="btn">Contact</a>
+          <a href="resume.pdf" class="btn outline" target="_blank">Download Resume</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="status-card">
+          <p class="card-title">LIVE STATUS</p>
+          <ul>
+            <li>✅ CompTIA CySA+</li>
+            <li>✅ Security+ / Cloud+</li>
+            <li>✅ AWS Certified Cloud Practitioner</li>
+            <li>✅ Splunk Core Certified User</li>
+            <li>📍 San Antonio, TX / Remote</li>
+          </ul>
+        </div>
+
+        <div class="lenticular-card" id="tiltCard">
+          <div class="grid-glow"></div>
+          <div class="shield">🛡️</div>
+          <h3>Threat Detection Layer</h3>
+          <p>SIEM • Cloud • Compliance • Incident Response</p>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section class="quick-skills" id="skills">
+      <div class="skill-box">
+        <h3>Detection & Monitoring</h3>
+        <p>Splunk, Wazuh, SIEM dashboards, alert triage, IOC review.</p>
+      </div>
+
+      <div class="skill-box">
+        <h3>Cloud Security</h3>
+        <p>AWS IAM, VPC, CloudTrail, CloudWatch, GuardDuty, secure architecture.</p>
+      </div>
+
+      <div class="skill-box">
+        <h3>GRC & Compliance</h3>
+        <p>RMF, NIST 800-53, DISA STIGs, SCAP validation, POA&M support.</p>
+      </div>
     </section>
 
+    <section id="projects">
+      <h2>Featured Projects</h2>
+
+      <div class="project-grid">
+        <article class="project-card">
+          <h3>Enterprise SIEM Lab</h3>
+          <p>Built a Wazuh + Suricata + Kali lab to detect Nmap reconnaissance and Hydra SSH brute-force activity.</p>
+          <span>MITRE ATT&CK T1110</span>
+        </article>
+
+        <article class="project-card">
+          <h3>Windows 11 DISA STIG Lab</h3>
+          <p>Remediated STIG findings, enabled SEHOP hardening, validated changes using SCAP scans and STIG Viewer.</p>
+          <span>RMF / STIG / SCAP</span>
+        </article>
+
+        <article class="project-card">
+          <h3>AWS Secure VPC Architecture</h3>
+          <p>Designed segmented AWS VPC architecture with private subnets, NAT, route tables, and hardened access controls.</p>
+          <span>AWS / IAM / VPC</span>
+        </article>
+
+        <article class="project-card">
+          <h3>Phishing Triage Automation</h3>
+          <p>Created an n8n workflow to ingest phishing reports, structure evidence, and support SOC-style triage.</p>
+          <span>Automation / SOC</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="about">
+      <h2>About Me</h2>
+      <p>
+        I bring 20 years of Navy leadership into cybersecurity, combining operational discipline,
+        technical curiosity, and a risk-focused mindset. My focus is protecting systems,
+        reducing exposure, and communicating security findings in a way leaders can actually use.
+      </p>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>Let’s Connect</h2>
+      <p>Open to cybersecurity, cloud security, SOC analyst, and GRC opportunities.</p>
+
+      <div class="buttons center">
+        <a href="https://github.com/Arnold-Lunaa" target="_blank" class="btn primary">GitHub</a>
+        <a href="https://www.linkedin.com" target="_blank" class="btn">LinkedIn</a>
+        <a href="mailto:Arnoldo.Luna@outlook.com" class="btn outline">Email Me</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
