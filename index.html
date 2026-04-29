@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Arnoldo Luna | Cybersecurity Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arnoldo Luna | SOC Dashboard</title>
 
 <style>
 * { box-sizing: border-box; scroll-behavior: smooth; }
@@ -11,345 +11,269 @@
 :root {
   --bg: #05020f;
   --panel: rgba(10, 15, 31, 0.9);
-  --panel2: rgba(18, 12, 38, 0.92);
   --cyan: #00eaff;
   --green: #00ff88;
   --orange: #ff9f1c;
   --gold: #ffd166;
-  --text: #f8fafc;
-  --muted: #cbd5e1;
-  --border: rgba(255, 209, 102, 0.25);
+  --muted: #94a3b8;
 }
 
-/* ===== BASE ===== */
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background:
-    radial-gradient(circle at 18% 10%, rgba(255,159,28,.24), transparent 22%),
-    radial-gradient(circle at 80% 12%, rgba(0,234,255,.14), transparent 28%),
-    radial-gradient(circle at 60% 100%, rgba(255,43,214,.13), transparent 35%),
-    linear-gradient(135deg, #100714, #061825 60%, #05020f);
-  color: var(--text);
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-
-/* ===== NAV ===== */
-.nav {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 8%;
-}
-
-.logo {
-  font-weight: 900;
-  color: var(--gold);
-  letter-spacing: 3px;
-}
-
-.logo span { color: var(--cyan); }
-
-.nav a {
-  margin-left: 20px;
-  color: var(--muted);
-  text-decoration: none;
-}
-
-/* ===== HERO ===== */
-.hero {
-  padding: 60px 8%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
-}
-
-h1 {
-  font-size: clamp(3rem, 6vw, 5rem);
-  margin: 10px 0;
-  text-transform: uppercase;
-}
-
-h1 span {
-  color: var(--orange);
-  text-shadow: 0 0 15px var(--orange);
-}
-
-.summary {
-  color: var(--muted);
-  max-width: 600px;
-}
-
-/* ===== TERMINAL ===== */
-.terminal {
-  background: #020617;
-  border: 1px solid rgba(255,200,0,0.4);
-  padding: 15px;
-  border-radius: 12px;
-  margin: 20px 0;
-  font-family: monospace;
-  color: var(--green);
-}
-
-/* ===== BUTTONS ===== */
-.buttons a {
-  display: inline-block;
-  margin: 10px;
-  padding: 12px 18px;
-  border-radius: 10px;
-  text-decoration: none;
-  border: 1px solid var(--cyan);
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#100714,#061825);
   color: white;
 }
 
-.buttons a.primary {
-  background: linear-gradient(135deg, var(--orange), var(--gold));
-  color: black;
+/* ===== LAYOUT ===== */
+.dashboard {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  padding: 20px;
+  border-right: 1px solid #222;
+}
+
+.logo {
+  color: var(--gold);
   font-weight: bold;
 }
 
-.buttons a:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 15px var(--cyan);
+.profile {
+  background: #0b1220;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 20px 0;
 }
 
-/* ===== LENTICULAR IMAGE ===== */
-.lenticular-wrapper { perspective: 1200px; }
+.profile h3 { margin: 5px 0; }
 
-.lenticular {
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  transition: .15s;
-  box-shadow: 0 0 30px rgba(255,140,0,.3), 0 0 60px rgba(0,255,255,.2);
-}
-
-.lenticular img {
-  width: 100%;
+.sidebar a {
   display: block;
+  color: var(--muted);
+  margin: 10px 0;
+  text-decoration: none;
 }
 
-.lenticular::after {
-  content:"";
-  position:absolute;
-  inset:-50%;
-  background:linear-gradient(120deg, transparent 30%, rgba(255,255,255,.15), rgba(0,255,255,.25), transparent 70%);
-  transform:rotate(25deg);
-  animation:shine 4s linear infinite;
+/* ===== MAIN ===== */
+.main { padding: 30px; }
+
+h1 span { color: var(--orange); }
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 15px;
 }
 
-@keyframes shine {
-  from { transform:translateX(-40%) rotate(25deg); }
-  to { transform:translateX(40%) rotate(25deg); }
+.metric {
+  background: #0b1220;
+  padding: 20px;
+  border-radius: 10px;
 }
 
-/* ===== SECTIONS ===== */
-.section {
-  padding: 50px 8%;
-}
+.metric h3 { margin: 5px 0; }
 
-h2 {
-  color: var(--gold);
+/* ===== PANELS ===== */
+.panel {
+  background: #0b1220;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
 }
 
 /* ===== GRID ===== */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-  gap: 20px;
+  gap: 15px;
 }
 
 .card {
-  background: var(--panel);
-  padding: 20px;
-  border-radius: 15px;
-  border: 1px solid #334155;
-  transition: .2s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 20px rgba(255,140,0,.3);
-}
-
-.tag {
-  color: var(--cyan);
-  font-weight: bold;
-}
-
-/* ===== CERTS ===== */
-.cert {
-  padding: 12px;
-  border: 1px solid var(--border);
+  background: #111827;
+  padding: 15px;
   border-radius: 10px;
-  background: var(--panel2);
 }
+
+/* ===== ALERTS ===== */
+.alert {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #222;
+}
+
+.sev { font-weight: bold; }
+
+.crit { color: red; }
+.high { color: orange; }
+.med { color: gold; }
+
+/* ===== IMAGE ===== */
+img { width: 100%; border-radius: 10px; }
 
 /* ===== MOBILE ===== */
 @media(max-width:900px){
-  .hero { grid-template-columns:1fr; }
+  .dashboard { grid-template-columns:1fr; }
+  .metrics { grid-template-columns:1fr; }
 }
 </style>
 </head>
 
 <body>
 
-<nav class="nav">
-  <div class="logo">AL<span>SEC</span></div>
-  <div>
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
+<div class="dashboard">
 
-<section class="hero">
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="logo">ALSEC</div>
 
-<div>
-  <h1>Cybersecurity <span>Operator</span></h1>
-
-  <p class="summary">
-    Cybersecurity Analyst focused on SIEM monitoring, threat detection, and cloud security operations.
-    Hands-on experience with Wazuh, Kali Linux, MITRE ATT&CK mapping, brute-force detection, and AWS monitoring.
-  </p>
-
-  <div class="terminal">
-    <p>> Initializing security profile...</p>
-    <p>[OK] CySA+</p>
-    <p>[OK] Security+</p>
-    <p>[OK] Cloud+</p>
-    <p>[OK] Splunk Core User...ready</p>
-    <p>[OK] AWS CCP...ready</p>
-    <p>[OK] Active Directory / Linux skills loaded</p>
-    <p>[POWER LEVEL] Increasing...</p>
+  <div class="profile">
+    <small>SOC ANALYST PROFILE</small>
+    <h3>Arnoldo Luna</h3>
+    <p>Navy Veteran • Cybersecurity</p>
   </div>
 
-  <div class="buttons">
-    <a class="primary" href="https://github.com/Arnold-Luna/cybersecurity-projects" target="_blank">
-      Cybersecurity Portfolio
-    </a>
-    <a href="#projects">Projects</a>
-    <a href="mailto:Arnoldo.Luna@outlook.com">Contact</a>
-  </div>
+  <a href="#">Overview</a>
+  <a href="#">Threat Feed</a>
+  <a href="#">Projects</a>
+  <a href="#">Security Stack</a>
+  <a href="#">Contact</a>
 
-  <p style="color:#00ff88; font-family:monospace;">
-    STATUS: ACTIVELY SEEKING SOC / CYBERSECURITY ROLE
-  </p>
-
-</div>
-
-<div class="lenticular-wrapper">
-  <div class="lenticular" id="card">
-    <img src="cyberpunk-computer.png">
+  <div style="margin-top:20px; color:#00ff88;">
+    SYSTEM ONLINE
   </div>
 </div>
 
-</section>
+<!-- MAIN -->
+<div class="main">
 
-<section class="section" id="about">
-<h2>About Me</h2>
+<h1>SOC Dashboard <span>Portfolio</span></h1>
+<p>Cybersecurity analyst portfolio built like a live SOC environment.</p>
 
-<p>
-I’m a 20-year Navy Veteran transitioning into cybersecurity, bringing leadership,
-discipline, and decision-making under pressure into security operations.
-</p>
+<!-- METRICS -->
+<div class="metrics">
 
-<p>
-I have been actively upskilling through hands-on labs in SIEM monitoring,
-incident response, cloud security, Active Directory, Linux, Kali Linux,
-network reconnaissance, and vulnerability analysis.
-</p>
-
-<p>
-My focus is understanding attacker behavior, analyzing logs,
-and translating technical findings into real-world risk.
-</p>
-
-</section>
-
-<section class="section">
-<h2>Certifications</h2>
-<div class="grid">
-<div class="cert">CompTIA CySA+</div>
-<div class="cert">CompTIA Security+</div>
-<div class="cert">CompTIA Cloud+</div>
-<div class="cert">AWS Cloud Practitioner</div>
-<div class="cert">Splunk Certified User</div>
+<div class="metric">
+<small>Certifications</small>
+<h3 style="color:#00ff88;">7+</h3>
 </div>
-</section>
 
-<section class="section" id="projects">
-<h2>Projects</h2>
+<div class="metric">
+<small>Security Labs</small>
+<h3 style="color:#00eaff;">6</h3>
+</div>
 
+<div class="metric">
+<small>Frameworks</small>
+<h3 style="color:#ff9f1c;">NIST 800-53</h3>
+<p style="font-size:12px; color:#94a3b8;">
+RMF | STIGs/SCAP | MITRE ATT&CK | ISO 27001
+</p>
+</div>
+
+<div class="metric">
+<small>Status</small>
+<h3 style="color:#00ff88;">Ready</h3>
+</div>
+
+</div>
+
+<!-- IMAGE + TERMINAL -->
 <div class="grid">
 
+<div class="panel">
+<h3>Cyberpunk Visual Intel</h3>
+<img src="cyberpunk-computer.png">
+</div>
+
+<div class="panel">
+<h3>Analyst Terminal</h3>
+<pre style="color:#00ff88;">
+> Initializing workspace...
+[OK] CySA+
+[OK] AWS
+[OK] SIEM
+[OK] RMF / STIG
+</pre>
+</div>
+
+</div>
+
+<!-- ALERTS -->
+<div class="panel">
+<h3>Live Threat Feed</h3>
+
+<div class="alert">
+<span class="sev crit">CRITICAL</span>
+<span>Brute Force Activity</span>
+<span>00:05</span>
+</div>
+
+<div class="alert">
+<span class="sev high">HIGH</span>
+<span>Reconnaissance Scan</span>
+<span>00:07</span>
+</div>
+
+<div class="alert">
+<span class="sev med">MEDIUM</span>
+<span>STIG Validation Required</span>
+<span>00:09</span>
+</div>
+
+</div>
+
+<!-- SECURITY STACK -->
+<div class="panel">
+<h3>Security Stack</h3>
+
+<table width="100%">
+<tr><td>SIEM</td><td>Splunk / Wazuh</td></tr>
+<tr><td>Network</td><td>Wireshark / Nmap</td></tr>
+<tr><td>Cloud</td><td>AWS</td></tr>
+<tr><td>Compliance</td><td>NIST 800-53 / RMF / STIGs-SCAP / ISO 27001</td></tr>
+<tr><td>Detection</td><td>MITRE ATT&CK</td></tr>
+</table>
+
+</div>
+
+<!-- PROJECTS -->
+<div class="panel">
+<h3>Projects</h3>
+
+<div class="grid">
+
 <div class="card">
-<h3>SIEM Lab</h3>
-<p>Detected brute-force attacks using Wazuh and MITRE ATT&CK mapping.</p>
-<span class="tag">SIEM</span>
+<h4>SIEM Lab</h4>
+<p>Brute-force detection using Wazuh + MITRE mapping</p>
 </div>
 
 <div class="card">
-<h3>STIG Remediation</h3>
-<p>Remediated vulnerabilities and validated using SCAP.</p>
-<span class="tag">STIG</span>
+<h4>STIG Lab</h4>
+<p>Remediation and SCAP validation</p>
 </div>
 
 <div class="card">
-<h3>AWS Security</h3>
-<p>Built secure VPC architecture and monitoring controls.</p>
-<span class="tag">AWS</span>
-</div>
-
-<div class="card">
-<h3>Phishing Automation</h3>
-<p>Automated SOC triage workflows using n8n.</p>
-<span class="tag">SOC</span>
+<h4>AWS Security</h4>
+<p>Secure VPC + monitoring</p>
 </div>
 
 </div>
 
 <p>
-🔗 <a href="https://github.com/Arnold-Luna/cybersecurity-projects" target="_blank" style="color:#00eaff;">
-View Full Project Repository
+<a href="https://github.com/Arnold-Luna/cybersecurity-projects" target="_blank" style="color:#00eaff;">
+View Full Portfolio
 </a>
 </p>
 
-</section>
+</div>
 
-<section class="section" id="contact">
-<h2>Contact</h2>
-<p>Email: Arnoldo.Luna@outlook.com</p>
-</section>
-
-<script>
-const card = document.getElementById("card");
-
-card.addEventListener("mousemove", (e) => {
-  const rect = card.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
-
-  const rotateX = ((y - rect.height/2)/(rect.height/2))*-12;
-  const rotateY = ((x - rect.width/2)/(rect.width/2))*12;
-
-  card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-});
-
-card.addEventListener("mouseleave", () => {
-  card.style.transform = "rotateX(0) rotateY(0)";
-});
-</script>
+</div>
+</div>
 
 </body>
 </html>
