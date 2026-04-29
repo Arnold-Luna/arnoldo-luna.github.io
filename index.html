@@ -1,289 +1,625 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arnoldo Luna | Cybersecurity Portfolio</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Arnoldo Luna | SOC Dashboard Portfolio</title>
 
 <style>
-
-/* ================= BASE ================= */
 * { box-sizing: border-box; }
+
+:root {
+  --bg: #05020f;
+  --panel: rgba(15, 23, 42, 0.88);
+  --panel2: rgba(18, 12, 38, 0.92);
+  --cyan: #00eaff;
+  --green: #00ff88;
+  --orange: #ff9f1c;
+  --gold: #ffd166;
+  --pink: #ff2bd6;
+  --red: #ff3b5c;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --border: rgba(148, 163, 184, 0.22);
+}
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   background:
-    radial-gradient(circle at 20% 10%, rgba(255,140,0,0.2), transparent),
-    radial-gradient(circle at 80% 20%, rgba(0,255,255,0.15), transparent),
-    #05020f;
-  color: #f1f5f9;
+    radial-gradient(circle at 15% 10%, rgba(255,159,28,.18), transparent 22%),
+    radial-gradient(circle at 85% 15%, rgba(0,234,255,.12), transparent 26%),
+    radial-gradient(circle at 60% 100%, rgba(255,43,214,.10), transparent 32%),
+    var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
 }
 
-/* grid overlay */
 body::before {
-  content:"";
-  position:fixed;
-  inset:0;
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
   background:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size:40px 40px;
-  pointer-events:none;
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 42px 42px;
+  z-index: -1;
 }
 
-/* ================= NAV ================= */
-.nav {
-  display:flex;
-  justify-content:space-between;
-  padding:20px 8%;
+.dashboard {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  padding: 28px 22px;
+  border-right: 1px solid var(--border);
+  background: rgba(2, 6, 23, .72);
+  position: sticky;
+  top: 0;
+  height: 100vh;
 }
 
 .logo {
-  font-weight:900;
-  color:#ffd166;
-  letter-spacing:3px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: var(--gold);
+  margin-bottom: 30px;
+  text-shadow: 0 0 14px rgba(255,159,28,.45);
 }
 
-.logo span { color:#00eaff; }
+.logo span { color: var(--cyan); }
+
+.profile {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px;
+  background: var(--panel);
+  margin-bottom: 22px;
+}
+
+.profile small {
+  color: var(--cyan);
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.profile h2 {
+  margin: 8px 0 4px;
+  font-size: 1.15rem;
+}
+
+.profile p {
+  color: var(--muted);
+  font-size: .9rem;
+  margin: 0;
+}
 
 .nav a {
-  margin-left:20px;
-  color:#cbd5e1;
-  text-decoration:none;
+  display: block;
+  color: #cbd5e1;
+  text-decoration: none;
+  padding: 12px 14px;
+  margin: 8px 0;
+  border-radius: 12px;
+  border: 1px solid transparent;
 }
 
-/* ================= HERO ================= */
-.hero {
-  padding:60px 8%;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:40px;
-  align-items:center;
+.nav a:hover {
+  border-color: var(--cyan);
+  background: rgba(0,234,255,.08);
+  color: white;
 }
 
-h1 {
-  font-size:clamp(3rem,6vw,5rem);
-  margin:10px 0;
-  text-transform:uppercase;
+.status-pill {
+  margin-top: 24px;
+  padding: 12px;
+  border: 1px solid rgba(0,255,136,.35);
+  border-radius: 14px;
+  color: var(--green);
+  font-family: Consolas, monospace;
+  background: rgba(0,255,136,.06);
 }
 
-h1 span {
-  color:#ff9f1c;
-  text-shadow:0 0 15px #ff9f1c;
+/* MAIN */
+.main {
+  padding: 28px 4%;
 }
 
-.summary {
-  color:#cbd5e1;
-  max-width:600px;
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 24px;
 }
 
-/* ================= TERMINAL ================= */
-.terminal {
-  background:#020617;
-  border:1px solid rgba(255,200,0,0.4);
-  padding:15px;
-  border-radius:12px;
-  margin:20px 0;
-  font-family:monospace;
-  color:#00ff88;
+.topbar h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 4rem);
+  text-transform: uppercase;
+  line-height: 1;
 }
 
-/* ================= BUTTONS ================= */
-.buttons a {
-  display:inline-block;
-  margin:10px;
-  padding:12px 18px;
-  border-radius:10px;
-  text-decoration:none;
-  border:1px solid #00eaff;
-  color:white;
+.topbar h1 span {
+  color: var(--orange);
+  text-shadow: 0 0 16px rgba(255,159,28,.55);
 }
 
-.buttons a:hover {
-  transform:translateY(-3px);
-  box-shadow:0 0 15px #00eaff;
+.topbar p {
+  color: var(--muted);
+  margin: 10px 0 0;
 }
 
-/* ================= LENTICULAR IMAGE ================= */
-.lenticular-wrapper {
-  perspective:1200px;
+.actions a {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+  border-radius: 12px;
+  margin-left: 8px;
 }
+
+.actions a:first-child {
+  background: linear-gradient(135deg, var(--orange), var(--gold));
+  color: #16071f;
+  font-weight: 900;
+}
+
+/* GRID */
+.soc-grid {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 22px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: 0 18px 50px rgba(0,0,0,.28);
+}
+
+.panel-title {
+  color: var(--gold);
+  font-weight: 900;
+  letter-spacing: 2px;
+  font-size: .82rem;
+  margin-bottom: 16px;
+}
+
+/* METRICS */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.metric {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.metric small {
+  color: var(--muted);
+}
+
+.metric h3 {
+  margin: 8px 0 0;
+  font-size: 2rem;
+}
+
+.critical { color: var(--red); }
+.high { color: var(--orange); }
+.clean { color: var(--green); }
+.info { color: var(--cyan); }
+
+/* LENTICULAR */
+.lenticular-wrapper { perspective: 1200px; }
 
 .lenticular {
-  position:relative;
-  border-radius:20px;
-  overflow:hidden;
-  transition:0.15s;
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  transition: .15s;
+  border: 1px solid rgba(255,209,102,.28);
   box-shadow:
-    0 0 30px rgba(255,140,0,0.3),
-    0 0 60px rgba(0,255,255,0.2);
+    0 0 35px rgba(255,159,28,.28),
+    0 0 75px rgba(0,234,255,.15);
 }
 
 .lenticular img {
-  width:100%;
-  display:block;
+  width: 100%;
+  display: block;
 }
 
-/* holographic shine */
+.lenticular::before {
+  content: "LIVE VISUAL INTEL";
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  padding: 7px 10px;
+  border-radius: 999px;
+  color: var(--green);
+  background: rgba(2,6,23,.76);
+  font-family: Consolas, monospace;
+  font-size: .75rem;
+  border: 1px solid rgba(0,255,136,.35);
+}
+
 .lenticular::after {
-  content:"";
-  position:absolute;
-  inset:-50%;
-  background:linear-gradient(
-    120deg,
-    transparent 30%,
-    rgba(255,255,255,0.15),
-    rgba(0,255,255,0.25),
-    transparent 70%
-  );
-  transform:rotate(25deg);
-  animation:shine 4s linear infinite;
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.16), rgba(0,234,255,.24), transparent 68%);
+  animation: shine 4s linear infinite;
 }
 
 @keyframes shine {
-  from { transform:translateX(-40%) rotate(25deg); }
-  to { transform:translateX(40%) rotate(25deg); }
+  from { transform: translateX(-35%) rotate(25deg); }
+  to { transform: translateX(40%) rotate(25deg); }
 }
 
-/* ================= CARDS ================= */
-.section {
-  padding:60px 8%;
+/* TERMINAL */
+.terminal {
+  background: #020617;
+  border: 1px solid rgba(0,255,136,.32);
+  color: var(--green);
+  font-family: Consolas, monospace;
+  border-radius: 18px;
+  padding: 18px;
+  min-height: 190px;
 }
 
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
+.terminal p { margin: 5px 0; }
+
+/* ALERT FEED */
+.alert {
+  display: grid;
+  grid-template-columns: 82px 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  margin-bottom: 12px;
+  background: rgba(2,6,23,.38);
 }
 
-.card {
-  background:#111827;
-  padding:20px;
-  border-radius:15px;
-  border:1px solid #334155;
-  transition:0.2s;
+.sev {
+  font-weight: 900;
+  font-size: .78rem;
+  padding: 7px 9px;
+  border-radius: 999px;
+  text-align: center;
 }
 
-.card:hover {
-  transform:translateY(-5px);
-  box-shadow:0 0 20px rgba(255,140,0,0.3);
+.sev.crit { background: rgba(255,59,92,.16); color: var(--red); border: 1px solid rgba(255,59,92,.35); }
+.sev.high { background: rgba(255,159,28,.16); color: var(--orange); border: 1px solid rgba(255,159,28,.35); }
+.sev.med { background: rgba(255,209,102,.12); color: var(--gold); border: 1px solid rgba(255,209,102,.28); }
+
+.alert h4 {
+  margin: 0;
 }
 
-h2 {
-  margin-bottom:20px;
-  color:#ffd166;
+.alert p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: .9rem;
 }
 
-/* ================= MOBILE ================= */
-@media(max-width:900px){
-  .hero { grid-template-columns:1fr; }
+.time {
+  color: var(--cyan);
+  font-family: Consolas, monospace;
+  font-size: .85rem;
 }
 
+/* PROJECTS */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.project {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+  transition: .22s;
+}
+
+.project:hover {
+  transform: translateY(-6px);
+  border-color: var(--orange);
+  box-shadow: 0 0 28px rgba(255,159,28,.18);
+}
+
+.project h3 { margin-top: 0; }
+
+.tag {
+  color: var(--cyan);
+  font-weight: 900;
+  font-size: .82rem;
+}
+
+/* TABLE */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table td {
+  padding: 12px 8px;
+  border-bottom: 1px solid rgba(148,163,184,.14);
+}
+
+.table td:last-child {
+  text-align: right;
+  color: var(--green);
+  font-family: Consolas, monospace;
+}
+
+.footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 45px 0 20px;
+}
+
+@media (max-width: 1050px) {
+  .dashboard { grid-template-columns: 1fr; }
+  .sidebar {
+    position: relative;
+    height: auto;
+  }
+  .soc-grid,
+  .metrics,
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .actions a {
+    margin: 6px 6px 0 0;
+  }
+}
 </style>
 </head>
 
 <body>
 
-<!-- NAV -->
-<div class="nav">
-  <div class="logo">AL<span>SEC</span></div>
-  <div>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </div>
+<div class="dashboard">
+
+  <aside class="sidebar">
+    <div class="logo">AL<span>SEC</span></div>
+
+    <div class="profile">
+      <small>SOC ANALYST PROFILE</small>
+      <h2>Arnoldo Luna</h2>
+      <p>Navy Veteran • Cybersecurity • Cloud Security • GRC</p>
+    </div>
+
+    <nav class="nav">
+      <a href="#overview">Overview</a>
+      <a href="#alerts">Threat Feed</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Security Stack</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="status-pill">
+      SYSTEM STATUS: ONLINE<br />
+      POWER LEVEL: SECURE
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <section class="topbar" id="overview">
+      <div>
+        <h1>SOC Dashboard <span>Portfolio</span></h1>
+        <p>Cybersecurity analyst portfolio built like a live security operations command center.</p>
+      </div>
+
+      <div class="actions">
+        <a href="#projects">View Projects</a>
+        <a href="mailto:Arnoldo.Luna@outlook.com">Contact</a>
+        <a href="resume.pdf" target="_blank">Resume</a>
+      </div>
+    </section>
+
+    <section class="metrics">
+      <div class="metric">
+        <small>Certifications</small>
+        <h3 class="clean">7+</h3>
+      </div>
+      <div class="metric">
+        <small>Security Labs</small>
+        <h3 class="info">6</h3>
+      </div>
+      <div class="metric">
+        <small>Frameworks</small>
+        <h3 class="high">NIST</h3>
+      </div>
+      <div class="metric">
+        <small>Status</small>
+        <h3 class="clean">Ready</h3>
+      </div>
+    </section>
+
+    <section class="soc-grid">
+      <div class="panel">
+        <div class="panel-title">CYBERPUNK VISUAL INTEL</div>
+        <div class="lenticular-wrapper">
+          <div class="lenticular" id="card">
+            <img src="cyberpunk-computer.png" alt="Cyberpunk retro computer SOC visual" />
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">ANALYST TERMINAL</div>
+        <div class="terminal" id="terminal">
+          <p>&gt; Initializing analyst workspace...</p>
+          <p>[OK] CySA+ loaded</p>
+          <p>[OK] AWS cloud controls mapped</p>
+          <p>[OK] SIEM detection mindset active</p>
+          <p>[OK] RMF / STIG evidence workflow ready</p>
+          <p>[POWER LEVEL] Security posture rising...</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="soc-grid" style="margin-top:22px;" id="alerts">
+      <div class="panel">
+        <div class="panel-title">LIVE THREAT FEED</div>
+
+        <div class="alert">
+          <div class="sev crit">CRITICAL</div>
+          <div>
+            <h4>Brute Force Activity Detected</h4>
+            <p>Multiple failed SSH logins mapped to MITRE ATT&CK T1110.</p>
+          </div>
+          <div class="time">00:01</div>
+        </div>
+
+        <div class="alert">
+          <div class="sev high">HIGH</div>
+          <div>
+            <h4>Suspicious Reconnaissance</h4>
+            <p>Nmap-style scan pattern identified across exposed services.</p>
+          </div>
+          <div class="time">00:04</div>
+        </div>
+
+        <div class="alert">
+          <div class="sev med">MEDIUM</div>
+          <div>
+            <h4>STIG Finding Requires Validation</h4>
+            <p>Control evidence prepared for SCAP retest and POA&M closure.</p>
+          </div>
+          <div class="time">00:07</div>
+        </div>
+      </div>
+
+      <div class="panel" id="skills">
+        <div class="panel-title">SECURITY STACK</div>
+        <table class="table">
+          <tr><td>SIEM</td><td>Splunk / Wazuh</td></tr>
+          <tr><td>Network Defense</td><td>Suricata / Wireshark</td></tr>
+          <tr><td>Cloud</td><td>AWS IAM / VPC</td></tr>
+          <tr><td>Compliance</td><td>RMF / NIST / STIG</td></tr>
+          <tr><td>Automation</td><td>n8n / Python</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="panel" style="margin-top:22px;">
+        <div class="panel-title">FEATURED SECURITY PROJECTS</div>
+
+        <div class="project-grid">
+          <div class="project">
+            <h3>Enterprise SIEM Lab</h3>
+            <p>Detected brute-force and reconnaissance activity using Wazuh, Suricata, Kali, and OpenSearch.</p>
+            <span class="tag">MITRE T1110</span>
+          </div>
+
+          <div class="project">
+            <h3>Windows 11 STIG Lab</h3>
+            <p>Remediated DISA STIG findings, enabled SEHOP hardening, and validated using SCAP scans.</p>
+            <span class="tag">STIG / SCAP</span>
+          </div>
+
+          <div class="project">
+            <h3>AWS Secure VPC</h3>
+            <p>Built segmented AWS networking with public/private subnets, NAT, route tables, and access controls.</p>
+            <span class="tag">AWS / CLOUD</span>
+          </div>
+
+          <div class="project">
+            <h3>Phishing Triage Automation</h3>
+            <p>Built an n8n pipeline to ingest, structure, and track phishing evidence for SOC-style triage.</p>
+            <span class="tag">AUTOMATION</span>
+          </div>
+
+          <div class="project">
+            <h3>Incident Response Workflow</h3>
+            <p>Documented detection, containment, investigation notes, and recovery actions for audit-ready reporting.</p>
+            <span class="tag">IR / EVIDENCE</span>
+          </div>
+
+          <div class="project">
+            <h3>Cloud Alert Pipeline</h3>
+            <p>Designed event-driven alerting with AWS EventBridge, Lambda, SQS, SNS, and dead-letter queues.</p>
+            <span class="tag">SERVERLESS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="contact" style="margin-top:22px;">
+      <div class="panel-title">CONTACT CHANNEL</div>
+      <h2>Let’s Connect</h2>
+      <p>Open to SOC Analyst, Cloud Security, Cybersecurity Analyst, and GRC opportunities.</p>
+      <div class="actions">
+        <a href="https://github.com/Arnold-Lunaa" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
+        <a href="mailto:Arnoldo.Luna@outlook.com">Email</a>
+      </div>
+    </section>
+
+    <div class="footer">
+      Built for detection. Documented for trust. Ready for the next mission.
+    </div>
+
+  </main>
 </div>
 
-<!-- HERO -->
-<section class="hero">
-
-<div>
-  <h1>Cybersecurity <span>Operator</span></h1>
-
-  <p class="summary">
-    Navy Veteran with 20 years of leadership bringing discipline into cloud security,
-    SIEM monitoring, incident response, and compliance.
-  </p>
-
-  <div class="terminal">
-    <p>> Initializing security profile...</p>
-    <p>[OK] CySA+</p>
-    <p>[OK] AWS ready</p>
-    <p>[OK] Threat detection active</p>
-    <p>[POWER LEVEL] Increasing...</p>
-  </div>
-
-  <div class="buttons">
-    <a href="#projects">Projects</a>
-    <a href="mailto:Arnoldo.Luna@outlook.com">Contact</a>
-  </div>
-</div>
-
-<!-- LENTICULAR IMAGE -->
-<div class="lenticular-wrapper">
-  <div class="lenticular" id="card">
-    <img src="cyberpunk-computer.png" alt="Cyberpunk Computer">
-  </div>
-</div>
-
-</section>
-
-<!-- PROJECTS -->
-<section class="section" id="projects">
-<h2>Projects</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>SIEM Lab</h3>
-<p>Detected brute-force attacks and analyzed logs using Wazuh + Suricata.</p>
-</div>
-
-<div class="card">
-<h3>STIG Remediation</h3>
-<p>Remediated vulnerabilities and validated with SCAP scans.</p>
-</div>
-
-<div class="card">
-<h3>AWS Security</h3>
-<p>Built secure VPC architecture with IAM and monitoring controls.</p>
-</div>
-
-<div class="card">
-<h3>Phishing Automation</h3>
-<p>Automated SOC triage workflows using n8n.</p>
-</div>
-
-</div>
-</section>
-
-<!-- CONTACT -->
-<section class="section" id="contact">
-<h2>Contact</h2>
-<p>Email: Arnoldo.Luna@outlook.com</p>
-</section>
-
-<!-- JS TILT -->
 <script>
 const card = document.getElementById("card");
 
-card.addEventListener("mousemove", (e) => {
-  const rect = card.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
+if (card) {
+  card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
-  const centerX = rect.width / 2;
-  const centerY = rect.height / 2;
+    const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -10;
+    const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * 10;
 
-  const rotateX = ((y - centerY) / centerY) * -12;
-  const rotateY = ((x - centerX) / centerX) * 12;
+    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+  });
 
-  card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-});
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
+  });
+}
 
-card.addEventListener("mouseleave", () => {
-  card.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
-});
+// Fake live SOC feed timestamps
+const times = document.querySelectorAll(".time");
+let seconds = 1;
+
+setInterval(() => {
+  times.forEach((time, index) => {
+    const value = seconds + index * 3;
+    time.textContent = `00:${String(value).padStart(2, "0")}`;
+  });
+  seconds++;
+  if (seconds > 59) seconds = 1;
+}, 1000);
 </script>
 
 </body>
