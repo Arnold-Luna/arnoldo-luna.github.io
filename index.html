@@ -1,670 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arnoldo Luna | Cybersecurity Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arnoldo Luna | Cybersecurity Portfolio</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
 
-    :root {
-      --void: #05020f;
-      --space: #090421;
-      --panel: rgba(18, 12, 38, 0.86);
-      --cyan: #00eaff;
-      --pink: #ff2bd6;
-      --orange: #ff9f1c;
-      --gold: #ffd166;
-      --green: #00ff88;
-      --text: #f8fafc;
-      --muted: #cbd5e1;
-    }
+/* ================= BASE ================= */
+* { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at 18% 12%, rgba(255, 159, 28, 0.22), transparent 18%),
-        radial-gradient(circle at 82% 22%, rgba(255, 43, 214, 0.16), transparent 24%),
-        radial-gradient(circle at 50% 100%, rgba(0, 234, 255, 0.14), transparent 30%),
-        linear-gradient(135deg, var(--void), var(--space));
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255,140,0,0.2), transparent),
+    radial-gradient(circle at 80% 20%, rgba(0,255,255,0.15), transparent),
+    #05020f;
+  color: #f1f5f9;
+}
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background:
-        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-      background-size: 42px 42px;
-      mask-image: radial-gradient(circle at center, black, transparent 78%);
-      z-index: -2;
-    }
+/* grid overlay */
+body::before {
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size:40px 40px;
+  pointer-events:none;
+}
 
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background: repeating-linear-gradient(
-        to bottom,
-        rgba(255,255,255,0.03),
-        rgba(255,255,255,0.03) 1px,
-        transparent 3px,
-        transparent 7px
-      );
-      opacity: 0.35;
-      z-index: -1;
-    }
+/* ================= NAV ================= */
+.nav {
+  display:flex;
+  justify-content:space-between;
+  padding:20px 8%;
+}
 
-    .hero {
-      min-height: 100vh;
-      padding: 30px 9%;
-      background:
-        radial-gradient(circle at 70% 15%, rgba(255, 159, 28, 0.20), transparent 22%),
-        radial-gradient(circle at 90% 45%, rgba(255, 43, 214, 0.12), transparent 30%);
-    }
+.logo {
+  font-weight:900;
+  color:#ffd166;
+  letter-spacing:3px;
+}
 
-    .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 70px;
-    }
+.logo span { color:#00eaff; }
 
-    .logo {
-      font-weight: 900;
-      letter-spacing: 4px;
-      color: var(--gold);
-      text-shadow:
-        0 0 8px rgba(255, 209, 102, 0.85),
-        0 0 18px rgba(255, 159, 28, 0.55);
-    }
+.nav a {
+  margin-left:20px;
+  color:#cbd5e1;
+  text-decoration:none;
+}
 
-    .logo span {
-      color: var(--cyan);
-      text-shadow:
-        0 0 8px rgba(0, 234, 255, 0.9),
-        0 0 18px rgba(0, 234, 255, 0.45);
-    }
+/* ================= HERO ================= */
+.hero {
+  padding:60px 8%;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  align-items:center;
+}
 
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      margin-left: 25px;
-      font-size: 0.95rem;
-      position: relative;
-    }
+h1 {
+  font-size:clamp(3rem,6vw,5rem);
+  margin:10px 0;
+  text-transform:uppercase;
+}
 
-    .nav-links a:hover {
-      color: var(--gold);
-    }
+h1 span {
+  color:#ff9f1c;
+  text-shadow:0 0 15px #ff9f1c;
+}
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 55px;
-      align-items: center;
-    }
+.summary {
+  color:#cbd5e1;
+  max-width:600px;
+}
 
-    .eyebrow {
-      color: var(--cyan);
-      letter-spacing: 7px;
-      font-size: 0.85rem;
-      font-weight: 900;
-      text-shadow: 0 0 12px rgba(0, 234, 255, 0.7);
-    }
+/* ================= TERMINAL ================= */
+.terminal {
+  background:#020617;
+  border:1px solid rgba(255,200,0,0.4);
+  padding:15px;
+  border-radius:12px;
+  margin:20px 0;
+  font-family:monospace;
+  color:#00ff88;
+}
 
-    h1 {
-      font-size: clamp(3rem, 7vw, 6rem);
-      line-height: 1.03;
-      margin: 10px 0 25px;
-      text-transform: uppercase;
-      text-shadow:
-        0 0 12px rgba(255, 159, 28, 0.35),
-        0 0 28px rgba(255, 43, 214, 0.22);
-    }
+/* ================= BUTTONS ================= */
+.buttons a {
+  display:inline-block;
+  margin:10px;
+  padding:12px 18px;
+  border-radius:10px;
+  text-decoration:none;
+  border:1px solid #00eaff;
+  color:white;
+}
 
-    h1 span {
-      color: var(--orange);
-      text-shadow:
-        0 0 10px rgba(255, 159, 28, 0.95),
-        0 0 25px rgba(255, 159, 28, 0.55);
-    }
+.buttons a:hover {
+  transform:translateY(-3px);
+  box-shadow:0 0 15px #00eaff;
+}
 
-    .hero-summary {
-      max-width: 750px;
-      color: var(--muted);
-      font-size: 1.15rem;
-    }
+/* ================= LENTICULAR IMAGE ================= */
+.lenticular-wrapper {
+  perspective:1200px;
+}
 
-    .terminal {
-      background:
-        linear-gradient(135deg, rgba(5, 2, 15, 0.95), rgba(15, 23, 42, 0.82));
-      border: 1px solid rgba(255, 209, 102, 0.45);
-      box-shadow:
-        0 0 25px rgba(255, 159, 28, 0.12),
-        inset 0 0 25px rgba(0, 234, 255, 0.06);
-      border-radius: 18px;
-      padding: 18px;
-      margin: 25px 0;
-      font-family: Consolas, monospace;
-      color: var(--green);
-      max-width: 620px;
-      position: relative;
-      overflow: hidden;
-    }
+.lenticular {
+  position:relative;
+  border-radius:20px;
+  overflow:hidden;
+  transition:0.15s;
+  box-shadow:
+    0 0 30px rgba(255,140,0,0.3),
+    0 0 60px rgba(0,255,255,0.2);
+}
 
-    .terminal::before {
-      content: "SCOUTER LOG";
-      position: absolute;
-      top: 10px;
-      right: 14px;
-      color: rgba(255, 209, 102, 0.65);
-      font-size: 0.7rem;
-      letter-spacing: 2px;
-    }
+.lenticular img {
+  width:100%;
+  display:block;
+}
 
-    .terminal p {
-      margin: 3px 0;
-    }
+/* holographic shine */
+.lenticular::after {
+  content:"";
+  position:absolute;
+  inset:-50%;
+  background:linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255,255,255,0.15),
+    rgba(0,255,255,0.25),
+    transparent 70%
+  );
+  transform:rotate(25deg);
+  animation:shine 4s linear infinite;
+}
 
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+@keyframes shine {
+  from { transform:translateX(-40%) rotate(25deg); }
+  to { transform:translateX(40%) rotate(25deg); }
+}
 
-    .tags span {
-      border: 1px solid rgba(255, 209, 102, 0.35);
-      background:
-        linear-gradient(135deg, rgba(255, 159, 28, 0.12), rgba(255, 43, 214, 0.08));
-      padding: 7px 13px;
-      border-radius: 999px;
-      font-size: 0.85rem;
-    }
+/* ================= CARDS ================= */
+.section {
+  padding:60px 8%;
+}
 
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 28px;
-    }
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
 
-    .btn {
-      color: white;
-      text-decoration: none;
-      padding: 13px 20px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 209, 102, 0.32);
-      background: rgba(18, 12, 38, 0.78);
-      transition: 0.25s ease;
-    }
+.card {
+  background:#111827;
+  padding:20px;
+  border-radius:15px;
+  border:1px solid #334155;
+  transition:0.2s;
+}
 
-    .btn:hover {
-      transform: translateY(-3px) scale(1.02);
-      border-color: var(--orange);
-      box-shadow:
-        0 0 18px rgba(255, 159, 28, 0.35),
-        0 0 28px rgba(255, 43, 214, 0.18);
-    }
+.card:hover {
+  transform:translateY(-5px);
+  box-shadow:0 0 20px rgba(255,140,0,0.3);
+}
 
-    .primary {
-      background: linear-gradient(135deg, var(--orange), var(--gold));
-      color: #15071f;
-      font-weight: 900;
-    }
+h2 {
+  margin-bottom:20px;
+  color:#ffd166;
+}
 
-    .outline {
-      border-color: var(--cyan);
-      color: var(--cyan);
-    }
+/* ================= MOBILE ================= */
+@media(max-width:900px){
+  .hero { grid-template-columns:1fr; }
+}
 
-    .hero-card {
-      display: grid;
-      gap: 25px;
-    }
-
-    .status-card,
-    .lenticular-card,
-    .skill-box,
-    .project-card,
-    .about,
-    .contact {
-      background: var(--panel);
-      border: 1px solid rgba(255, 209, 102, 0.18);
-      border-radius: 24px;
-      box-shadow:
-        0 18px 60px rgba(0, 0, 0, 0.35),
-        inset 0 0 25px rgba(0, 234, 255, 0.04);
-    }
-
-    .status-card {
-      padding: 28px;
-    }
-
-    .card-title {
-      color: var(--gold);
-      font-size: 0.8rem;
-      font-weight: 900;
-      letter-spacing: 2px;
-    }
-
-    .status-card ul {
-      padding-left: 0;
-      list-style: none;
-    }
-
-    .status-card li {
-      margin: 13px 0;
-      color: #fef3c7;
-    }
-
-    .lenticular-card {
-      position: relative;
-      min-height: 340px;
-      padding: 35px;
-      overflow: hidden;
-      transform-style: preserve-3d;
-      transition: transform 0.15s ease;
-      background:
-        radial-gradient(circle at 50% 42%, rgba(255, 159, 28, 0.36), transparent 22%),
-        radial-gradient(circle at 50% 42%, rgba(0, 234, 255, 0.18), transparent 40%),
-        linear-gradient(135deg, rgba(255, 43, 214, 0.12), rgba(0, 234, 255, 0.08)),
-        #100720;
-    }
-
-    .lenticular-card::before {
-      content: "";
-      position: absolute;
-      inset: -60%;
-      background: linear-gradient(
-        115deg,
-        transparent 20%,
-        rgba(255,255,255,0.08) 40%,
-        rgba(255, 209, 102, 0.32) 50%,
-        rgba(0, 234, 255, 0.18) 58%,
-        transparent 72%
-      );
-      transform: rotate(25deg);
-      animation: hologramSweep 4.4s linear infinite;
-    }
-
-    .lenticular-card::after {
-      content: "";
-      position: absolute;
-      width: 170px;
-      height: 170px;
-      left: 50%;
-      top: 43%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      background:
-        radial-gradient(circle, rgba(255, 209, 102, 0.98) 0 8%, transparent 9% 14%),
-        repeating-conic-gradient(
-          from 0deg,
-          rgba(255, 159, 28, 0.95) 0deg 12deg,
-          rgba(255, 209, 102, 0.55) 12deg 24deg
-        );
-      filter:
-        drop-shadow(0 0 20px rgba(255, 159, 28, 0.9))
-        drop-shadow(0 0 45px rgba(255, 43, 214, 0.25));
-      opacity: 0.8;
-      animation: powerPulse 2.2s ease-in-out infinite;
-    }
-
-    .grid-glow {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(0, 234, 255, 0.10) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 234, 255, 0.10) 1px, transparent 1px);
-      background-size: 26px 26px;
-      mask-image: radial-gradient(circle, black, transparent 72%);
-    }
-
-    .shield {
-      font-size: 5rem;
-      filter:
-        drop-shadow(0 0 22px rgba(255, 209, 102, 0.85))
-        drop-shadow(0 0 34px rgba(0, 234, 255, 0.42));
-      position: relative;
-      z-index: 2;
-      animation: floatPower 3s ease-in-out infinite;
-    }
-
-    .lenticular-card h3,
-    .lenticular-card p {
-      position: relative;
-      z-index: 2;
-    }
-
-    .lenticular-card h3 {
-      font-size: 1.8rem;
-      margin-bottom: 5px;
-      color: var(--gold);
-      text-transform: uppercase;
-    }
-
-    .lenticular-card p {
-      color: #fef3c7;
-    }
-
-    @keyframes hologramSweep {
-      from {
-        transform: translateX(-20%) rotate(25deg);
-      }
-      to {
-        transform: translateX(35%) rotate(25deg);
-      }
-    }
-
-    @keyframes powerPulse {
-      0%, 100% {
-        transform: translate(-50%, -50%) scale(0.94);
-        opacity: 0.55;
-      }
-      50% {
-        transform: translate(-50%, -50%) scale(1.08);
-        opacity: 0.9;
-      }
-    }
-
-    @keyframes floatPower {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-8px);
-      }
-    }
-
-    main {
-      padding: 60px 9%;
-    }
-
-    .quick-skills,
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-
-    .skill-box,
-    .project-card {
-      padding: 25px;
-      transition: 0.25s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .skill-box:hover,
-    .project-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(255, 159, 28, 0.7);
-      box-shadow:
-        0 0 35px rgba(255, 159, 28, 0.16),
-        0 0 45px rgba(255, 43, 214, 0.10);
-    }
-
-    h2 {
-      font-size: 2.1rem;
-      margin-top: 75px;
-      color: var(--gold);
-      text-shadow: 0 0 14px rgba(255, 159, 28, 0.45);
-    }
-
-    .project-card span {
-      display: inline-block;
-      margin-top: 12px;
-      color: var(--cyan);
-      font-size: 0.9rem;
-      font-weight: bold;
-    }
-
-    .about,
-    .contact {
-      padding: 35px;
-      margin-top: 35px;
-    }
-
-    .center {
-      justify-content: center;
-    }
-
-    .contact {
-      text-align: center;
-    }
-
-    @media (max-width: 900px) {
-      .hero-grid,
-      .quick-skills,
-      .project-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .nav {
-        flex-direction: column;
-        gap: 20px;
-      }
-
-      .nav-links a {
-        margin: 0 10px;
-      }
-    }
-  </style>
+</style>
 </head>
 
 <body>
 
-  <header class="hero">
-    <nav class="nav">
-      <div class="logo">AL<span>SEC</span></div>
-      <div class="nav-links">
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </nav>
+<!-- NAV -->
+<div class="nav">
+  <div class="logo">AL<span>SEC</span></div>
+  <div>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</div>
 
-    <section class="hero-grid">
-      <div class="hero-text">
-        <p class="eyebrow">ARNOLDO LUNA</p>
+<!-- HERO -->
+<section class="hero">
 
-        <h1>
-          Cybersecurity Analyst <span>&</span><br />
-          Cloud Security
-        </h1>
+<div>
+  <h1>Cybersecurity <span>Operator</span></h1>
 
-        <p class="hero-summary">
-          Navy Veteran and cybersecurity professional focused on SIEM monitoring,
-          incident response, cloud security, RMF, NIST 800-53, DISA STIGs, and
-          risk-driven security operations.
-        </p>
+  <p class="summary">
+    Navy Veteran with 20 years of leadership bringing discipline into cloud security,
+    SIEM monitoring, incident response, and compliance.
+  </p>
 
-        <div class="terminal">
-          <p>C:\Users\Arnoldo&gt; scanning threat landscape...</p>
-          <p>[OK] CySA+ certified</p>
-          <p>[OK] AWS cloud security ready</p>
-          <p>[OK] SIEM detection mindset loaded</p>
-          <p>[OK] Mission-first leadership online</p>
-          <p>[POWER LEVEL] Security posture rising...</p>
-        </div>
+  <div class="terminal">
+    <p>> Initializing security profile...</p>
+    <p>[OK] CySA+</p>
+    <p>[OK] AWS ready</p>
+    <p>[OK] Threat detection active</p>
+    <p>[POWER LEVEL] Increasing...</p>
+  </div>
 
-        <div class="tags">
-          <span>CySA+</span>
-          <span>Security+</span>
-          <span>Cloud+</span>
-          <span>AWS CCP</span>
-          <span>Splunk</span>
-          <span>RMF</span>
-          <span>STIG</span>
-          <span>Incident Response</span>
-        </div>
+  <div class="buttons">
+    <a href="#projects">Projects</a>
+    <a href="mailto:Arnoldo.Luna@outlook.com">Contact</a>
+  </div>
+</div>
 
-        <div class="buttons">
-          <a href="#projects" class="btn primary">View Projects</a>
-          <a href="mailto:Arnoldo.Luna@outlook.com" class="btn">Contact</a>
-          <a href="resume.pdf" class="btn outline" target="_blank">Download Resume</a>
-        </div>
-      </div>
+<!-- LENTICULAR IMAGE -->
+<div class="lenticular-wrapper">
+  <div class="lenticular" id="card">
+    <img src="cyberpunk-computer.png" alt="Cyberpunk Computer">
+  </div>
+</div>
 
-      <div class="hero-card">
-        <div class="status-card">
-          <p class="card-title">LIVE STATUS</p>
-          <ul>
-            <li>✅ CompTIA CySA+</li>
-            <li>✅ CompTIA Security+ / Cloud+</li>
-            <li>✅ AWS Certified Cloud Practitioner</li>
-            <li>✅ Splunk Core Certified User</li>
-            <li>📍 San Antonio, TX / Remote</li>
-          </ul>
-        </div>
+</section>
 
-        <div class="lenticular-card" id="tiltCard">
-          <div class="grid-glow"></div>
-          <div class="shield">⚡</div>
-          <h3>Power Level: Secure</h3>
-          <p>Threat Detection • Cloud Defense • Compliance Armor</p>
-        </div>
-      </div>
-    </section>
-  </header>
+<!-- PROJECTS -->
+<section class="section" id="projects">
+<h2>Projects</h2>
 
-  <main>
-    <section class="quick-skills" id="skills">
-      <div class="skill-box">
-        <h3>Detection & Monitoring</h3>
-        <p>Splunk, Wazuh, SIEM dashboards, alert triage, IOC review, and suspicious activity analysis.</p>
-      </div>
+<div class="grid">
 
-      <div class="skill-box">
-        <h3>Cloud Security</h3>
-        <p>AWS IAM, VPC, CloudTrail, CloudWatch, GuardDuty, secure architecture, and logging controls.</p>
-      </div>
+<div class="card">
+<h3>SIEM Lab</h3>
+<p>Detected brute-force attacks and analyzed logs using Wazuh + Suricata.</p>
+</div>
 
-      <div class="skill-box">
-        <h3>GRC & Compliance</h3>
-        <p>RMF, NIST 800-53, DISA STIGs, SCAP validation, POA&M support, and audit-ready evidence.</p>
-      </div>
-    </section>
+<div class="card">
+<h3>STIG Remediation</h3>
+<p>Remediated vulnerabilities and validated with SCAP scans.</p>
+</div>
 
-    <section id="projects">
-      <h2>Featured Projects</h2>
+<div class="card">
+<h3>AWS Security</h3>
+<p>Built secure VPC architecture with IAM and monitoring controls.</p>
+</div>
 
-      <div class="project-grid">
-        <article class="project-card">
-          <h3>Enterprise SIEM Lab</h3>
-          <p>
-            Built a Wazuh + Suricata + Kali lab to detect Nmap reconnaissance
-            and Hydra SSH brute-force activity.
-          </p>
-          <span>MITRE ATT&CK T1110</span>
-        </article>
+<div class="card">
+<h3>Phishing Automation</h3>
+<p>Automated SOC triage workflows using n8n.</p>
+</div>
 
-        <article class="project-card">
-          <h3>Windows 11 DISA STIG Lab</h3>
-          <p>
-            Remediated STIG findings, enabled SEHOP hardening, validated changes
-            using SCAP scans and STIG Viewer.
-          </p>
-          <span>RMF / STIG / SCAP</span>
-        </article>
+</div>
+</section>
 
-        <article class="project-card">
-          <h3>AWS Secure VPC Architecture</h3>
-          <p>
-            Designed segmented AWS VPC architecture with private subnets, NAT,
-            route tables, and hardened access controls.
-          </p>
-          <span>AWS / IAM / VPC</span>
-        </article>
+<!-- CONTACT -->
+<section class="section" id="contact">
+<h2>Contact</h2>
+<p>Email: Arnoldo.Luna@outlook.com</p>
+</section>
 
-        <article class="project-card">
-          <h3>Phishing Triage Automation</h3>
-          <p>
-            Created an n8n workflow to ingest phishing reports, structure evidence,
-            and support SOC-style triage.
-          </p>
-          <span>Automation / SOC</span>
-        </article>
+<!-- JS TILT -->
+<script>
+const card = document.getElementById("card");
 
-        <article class="project-card">
-          <h3>Cloud-Native Security Alert Pipeline</h3>
-          <p>
-            Built an event-driven AWS workflow using EventBridge, Lambda, SQS,
-            SNS, retry logic, and dead-letter queues.
-          </p>
-          <span>AWS / Serverless / Alerts</span>
-        </article>
+card.addEventListener("mousemove", (e) => {
+  const rect = card.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
 
-        <article class="project-card">
-          <h3>Incident Response Workflow</h3>
-          <p>
-            Documented attack detection, containment actions, investigation notes,
-            and recovery steps for audit-ready response reporting.
-          </p>
-          <span>IR / Documentation / Evidence</span>
-        </article>
-      </div>
-    </section>
+  const centerX = rect.width / 2;
+  const centerY = rect.height / 2;
 
-    <section class="about">
-      <h2>About Me</h2>
-      <p>
-        I bring 20 years of Navy leadership into cybersecurity, combining operational discipline,
-        technical curiosity, and a risk-focused mindset. My focus is protecting systems,
-        reducing exposure, and communicating security findings in a way leaders can actually use.
-      </p>
-      <p>
-        My hands-on experience includes AWS, SIEM monitoring, incident response, RMF,
-        NIST 800-53, DISA STIG remediation, vulnerability management, and enterprise-style
-        security labs.
-      </p>
-    </section>
+  const rotateX = ((y - centerY) / centerY) * -12;
+  const rotateY = ((x - centerX) / centerX) * 12;
 
-    <section id="contact" class="contact">
-      <h2>Let’s Connect</h2>
-      <p>Open to cybersecurity, cloud security, SOC analyst, and GRC opportunities.</p>
+  card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+});
 
-      <div class="buttons center">
-        <a href="https://github.com/Arnold-Lunaa" target="_blank" class="btn primary">GitHub</a>
-        <a href="https://www.linkedin.com" target="_blank" class="btn">LinkedIn</a>
-        <a href="mailto:Arnoldo.Luna@outlook.com" class="btn outline">Email Me</a>
-      </div>
-    </section>
-  </main>
-
-  <script>
-    const tiltCard = document.getElementById("tiltCard");
-
-    tiltCard.addEventListener("mousemove", (e) => {
-      const rect = tiltCard.getBoundingClientRect();
-
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      const rotateX = ((y - centerY) / centerY) * -10;
-      const rotateY = ((x - centerX) / centerX) * 10;
-
-      tiltCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
-    });
-
-    tiltCard.addEventListener("mouseleave", () => {
-      tiltCard.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
-    });
-  </script>
+card.addEventListener("mouseleave", () => {
+  card.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
+});
+</script>
 
 </body>
 </html>
