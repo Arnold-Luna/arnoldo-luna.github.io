@@ -332,6 +332,9 @@ body::before {
 }
 
 .project {
+  display: block;
+  text-decoration: none;
+  color: inherit;
   background: var(--panel2);
   border: 1px solid var(--border);
   border-radius: 18px;
@@ -436,7 +439,6 @@ body::before {
       <div class="actions">
         <a href="#projects">View Projects</a>
         <a href="mailto:Arnoldo.Luna@outlook.com">Contact</a>
-        <a href="resume.pdf" target="_blank">Resume</a>
       </div>
     </section>
 
@@ -531,41 +533,43 @@ body::before {
         <div class="panel-title">FEATURED SECURITY PROJECTS</div>
 
         <div class="project-grid">
-          <div class="project">
+
+          <a class="project" href="https://github.com/Arnold-Lunaa/cybersecurity-projects/tree/main/Enterprise%20SIEM%20Lab%20%E2%80%93%20Wazuh%20%2B%20Suricata%20%2B%20Kali%20Linux%20%2B%20Fail2Ban" target="_blank" rel="noopener noreferrer">
             <h3>Enterprise SIEM Lab</h3>
             <p>Detected brute-force and reconnaissance activity using Wazuh, Suricata, Kali, and OpenSearch.</p>
             <span class="tag">MITRE T1110</span>
-          </div>
+          </a>
 
-          <div class="project">
+          <a class="project" href="https://github.com/Arnold-Lunaa/cybersecurity-projects/tree/main/Windows%2011%20DISA%20STIG%20Remediation%20Lab" target="_blank" rel="noopener noreferrer">
             <h3>Windows 11 STIG Lab</h3>
             <p>Remediated DISA STIG findings, enabled SEHOP hardening, and validated using SCAP scans.</p>
             <span class="tag">STIG / SCAP</span>
-          </div>
+          </a>
 
-          <div class="project">
+          <a class="project" href="https://github.com/Arnold-Lunaa/cybersecurity-projects/tree/main/AWS%20Secure%20VPC%20Networking%20Lab" target="_blank" rel="noopener noreferrer">
             <h3>AWS Secure VPC</h3>
             <p>Built segmented AWS networking with public/private subnets, NAT, route tables, and access controls.</p>
             <span class="tag">AWS / CLOUD</span>
-          </div>
+          </a>
 
-          <div class="project">
+          <a class="project" href="https://github.com/Arnold-Lunaa/cybersecurity-projects/tree/main/Phishing%20Triage%20Automation" target="_blank" rel="noopener noreferrer">
             <h3>Phishing Triage Automation</h3>
             <p>Built an n8n pipeline to ingest, structure, and track phishing evidence for SOC-style triage.</p>
             <span class="tag">AUTOMATION</span>
-          </div>
+          </a>
 
-          <div class="project">
+          <a class="project" href="https://github.com/Arnold-Lunaa/cybersecurity-projects/tree/main/Incident%20Response%20Workflow" target="_blank" rel="noopener noreferrer">
             <h3>Incident Response Workflow</h3>
             <p>Documented detection, containment, investigation notes, and recovery actions for audit-ready reporting.</p>
             <span class="tag">IR / EVIDENCE</span>
-          </div>
+          </a>
 
-          <div class="project">
+          <a class="project" href="https://github.com/Arnold-Lunaa/cybersecurity-projects/tree/main/Cloud%20Alert%20Pipeline" target="_blank" rel="noopener noreferrer">
             <h3>Cloud Alert Pipeline</h3>
             <p>Designed event-driven alerting with AWS EventBridge, Lambda, SQS, SNS, and dead-letter queues.</p>
             <span class="tag">SERVERLESS</span>
-          </div>
+          </a>
+
         </div>
       </div>
     </section>
