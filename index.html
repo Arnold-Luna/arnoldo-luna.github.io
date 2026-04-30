@@ -154,6 +154,11 @@ body::before {
   margin: 10px 0 0;
 }
 
+.money-line {
+  margin-top: 6px;
+  color: var(--cyan) !important;
+}
+
 .actions a {
   display: inline-block;
   text-decoration: none;
@@ -290,6 +295,12 @@ body::before {
   margin-top: 10px;
 }
 
+.log-line {
+  color: var(--green);
+  font-family: Consolas, monospace;
+  font-size: .86rem;
+}
+
 /* ALERT FEED */
 .alert {
   display: grid;
@@ -301,6 +312,13 @@ body::before {
   border-radius: 16px;
   margin-bottom: 12px;
   background: rgba(2,6,23,.38);
+  transition: .22s;
+}
+
+.alert:hover {
+  transform: translateY(-3px);
+  border-color: var(--orange);
+  box-shadow: 0 0 22px rgba(255,159,28,.16);
 }
 
 .sev {
@@ -311,9 +329,23 @@ body::before {
   text-align: center;
 }
 
-.sev.crit { background: rgba(255,59,92,.16); color: var(--red); border: 1px solid rgba(255,59,92,.35); }
-.sev.high { background: rgba(255,159,28,.16); color: var(--orange); border: 1px solid rgba(255,159,28,.35); }
-.sev.med { background: rgba(255,209,102,.12); color: var(--gold); border: 1px solid rgba(255,209,102,.28); }
+.sev.crit {
+  background: rgba(255,59,92,.16);
+  color: var(--red);
+  border: 1px solid rgba(255,59,92,.35);
+}
+
+.sev.high {
+  background: rgba(255,159,28,.16);
+  color: var(--orange);
+  border: 1px solid rgba(255,159,28,.35);
+}
+
+.sev.med {
+  background: rgba(255,209,102,.12);
+  color: var(--gold);
+  border: 1px solid rgba(255,209,102,.28);
+}
 
 .alert h4 {
   margin: 0;
@@ -329,6 +361,41 @@ body::before {
   color: var(--cyan);
   font-family: Consolas, monospace;
   font-size: .85rem;
+}
+
+.incident-btn {
+  margin-top: 10px;
+  display: inline-block;
+  color: var(--cyan);
+  font-size: .8rem;
+  font-weight: 900;
+  text-decoration: none;
+  border: 1px solid rgba(0,234,255,.35);
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(0,234,255,.06);
+}
+
+.incident-btn:hover {
+  color: white;
+  border-color: var(--orange);
+}
+
+.pulse-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  background: var(--green);
+  border-radius: 50%;
+  margin-right: 8px;
+  box-shadow: 0 0 14px var(--green);
+  animation: pulse 1.4s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: .4; transform: scale(.85); }
+  50% { opacity: 1; transform: scale(1.15); }
+  100% { opacity: .4; transform: scale(.85); }
 }
 
 /* CERTIFICATIONS */
@@ -418,22 +485,34 @@ body::before {
 
 @media (max-width: 1050px) {
   .dashboard { grid-template-columns: 1fr; }
+
   .sidebar {
     position: relative;
     height: auto;
   }
+
   .soc-grid,
   .metrics,
   .project-grid,
   .cert-grid {
     grid-template-columns: 1fr;
   }
+
   .topbar {
     flex-direction: column;
     align-items: flex-start;
   }
+
   .actions a {
     margin: 6px 6px 0 0;
+  }
+
+  .alert {
+    grid-template-columns: 1fr;
+  }
+
+  .time {
+    margin-top: 4px;
   }
 }
 </style>
@@ -455,9 +534,11 @@ body::before {
     <nav class="nav">
       <a href="#overview">Overview</a>
       <a href="#alerts">Threat Feed</a>
+      <a href="#console">SOC Console</a>
       <a href="#projects">Projects</a>
       <a href="#certifications">Certifications</a>
       <a href="#skills">Security Stack</a>
+      <a href="#workflow">Workflow</a>
       <a href="#contact">Contact</a>
     </nav>
 
@@ -473,6 +554,7 @@ body::before {
       <div>
         <h1>SOC Dashboard <span>Portfolio</span></h1>
         <p>Cybersecurity analyst portfolio built like a live security operations command center.</p>
+        <p class="money-line">I detect threats, validate controls, and turn raw logs into decisions that reduce risk.</p>
       </div>
 
       <div class="actions">
@@ -486,17 +568,20 @@ body::before {
         <small>Certifications</small>
         <h3 class="clean">9</h3>
       </div>
+
       <div class="metric">
         <small>Security Labs</small>
-        <h3 class="info">6</h3>
+        <h3 class="info">6+</h3>
       </div>
+
       <div class="metric">
-        <small>Frameworks</small>
-        <h3 class="high">RMF / NIST / HIPAA / AWS WAF</h3>
+        <small>Alerts Generated</small>
+        <h3 class="high">200+</h3>
       </div>
+
       <div class="metric">
-        <small>Status</small>
-        <h3 class="clean">Ready</h3>
+        <small>Findings Remediated</small>
+        <h3 class="clean">30+</h3>
       </div>
     </section>
 
@@ -535,13 +620,18 @@ body::before {
 
     <section class="soc-grid" style="margin-top:22px;" id="alerts">
       <div class="panel">
-        <div class="panel-title">LIVE THREAT FEED</div>
+        <div class="panel-title">
+          <span class="pulse-dot"></span>LIVE THREAT FEED
+        </div>
 
         <div class="alert">
           <div class="sev crit">CRITICAL</div>
           <div>
-            <h4>Brute Force Activity Detected</h4>
-            <p>Multiple failed SSH logins mapped to MITRE ATT&CK T1110.</p>
+            <h4>SSH Brute Force Detected</h4>
+            <p>SRC: 192.168.56.101 → DEST: 22 | RULE: Wazuh 5760 | ACTION: Fail2Ban BAN</p>
+            <a class="incident-btn" href="https://github.com/Arnold-Luna/cybersecurity-projects/tree/main/Enterprise%20SIEM%20Lab%20%E2%80%93%20Wazuh%20%2B%20Suricata%20%2B%20Kali%20Linux%20%2B%20Fail2Ban" target="_blank" rel="noopener noreferrer">
+              View Incident Report
+            </a>
           </div>
           <div class="time">00:01</div>
         </div>
@@ -549,8 +639,11 @@ body::before {
         <div class="alert">
           <div class="sev high">HIGH</div>
           <div>
-            <h4>Suspicious Reconnaissance</h4>
-            <p>Nmap-style scan pattern identified across exposed services.</p>
+            <h4>Reconnaissance Scan Detected</h4>
+            <p>Nmap SYN scan pattern across ports 21, 22, 80, 443 | Suricata flagged anomaly</p>
+            <a class="incident-btn" href="https://github.com/Arnold-Luna/cybersecurity-projects/tree/main/nmap-localhost-scan" target="_blank" rel="noopener noreferrer">
+              View Scan Notes
+            </a>
           </div>
           <div class="time">00:04</div>
         </div>
@@ -559,7 +652,10 @@ body::before {
           <div class="sev med">MEDIUM</div>
           <div>
             <h4>STIG Finding Requires Validation</h4>
-            <p>Control evidence prepared for SCAP retest and POA&M closure.</p>
+            <p>CAT finding remediated → SCAP retest → evidence captured → POA&M closure support</p>
+            <a class="incident-btn" href="https://github.com/Arnold-Luna/cybersecurity-projects/tree/main/Windows%2011%20DISA%20STIG%20Remediation%20Lab" target="_blank" rel="noopener noreferrer">
+              View Evidence Workflow
+            </a>
           </div>
           <div class="time">00:07</div>
         </div>
@@ -577,6 +673,19 @@ body::before {
       </div>
     </section>
 
+    <section class="panel" style="margin-top:22px;" id="console">
+      <div class="panel-title">SOC ANALYST CONSOLE</div>
+
+      <div class="terminal">
+        <p class="log-line">[ALERT] Multiple SSH failures detected from 192.168.56.101</p>
+        <p class="log-line">[ENRICH] MITRE Technique: T1110 - Brute Force</p>
+        <p class="log-line">[TRIAGE] Severity: Critical | Asset: Ubuntu SSH Server</p>
+        <p class="log-line">[ACTION] Fail2Ban triggered automated IP block</p>
+        <p class="log-line">[EVIDENCE] Logs preserved for incident report and audit trail</p>
+        <p class="log-line">[STATUS] Containment complete. Monitoring continues...</p>
+      </div>
+    </section>
+
     <section id="certifications">
       <div class="panel" style="margin-top:22px;">
         <div class="panel-title">CERTIFICATIONS</div>
@@ -584,47 +693,47 @@ body::before {
         <div class="cert-grid">
           <div class="cert">
             <h3>CompTIA CySA+</h3>
-            <span>CYBERSECURITY ANALYST</span>
+            <span>Threat Detection • Incident Response</span>
           </div>
 
           <div class="cert">
             <h3>CompTIA Security+</h3>
-            <span>SECURITY FUNDAMENTALS</span>
+            <span>Security Fundamentals • Risk Awareness</span>
           </div>
 
           <div class="cert">
             <h3>CompTIA Cloud+</h3>
-            <span>CLOUD INFRASTRUCTURE</span>
+            <span>Cloud Infrastructure • Operations</span>
           </div>
 
           <div class="cert">
             <h3>CompTIA Security Analytics Professional</h3>
-            <span>CSAP</span>
+            <span>CSAP • Security Analytics</span>
           </div>
 
           <div class="cert">
             <h3>CompTIA Secure Cloud Professional</h3>
-            <span>CSCP</span>
+            <span>CSCP • Cloud Security</span>
           </div>
 
           <div class="cert">
             <h3>AWS Certified Cloud Practitioner</h3>
-            <span>AWS CLOUD</span>
+            <span>AWS Cloud • IAM • Risk Awareness</span>
           </div>
 
           <div class="cert">
             <h3>Splunk Core Certified User</h3>
-            <span>SIEM / SPLUNK</span>
+            <span>Log Analysis • SIEM Queries</span>
           </div>
 
           <div class="cert">
             <h3>Google Cybersecurity Professional Certificate</h3>
-            <span>CYBERSECURITY</span>
+            <span>Cybersecurity • Detection Basics</span>
           </div>
 
           <div class="cert">
             <h3>Google Project Management Professional Certificate</h3>
-            <span>PROJECT MANAGEMENT</span>
+            <span>Planning • Documentation • Delivery</span>
           </div>
         </div>
       </div>
@@ -674,10 +783,27 @@ body::before {
       </div>
     </section>
 
+    <section class="panel" style="margin-top:22px;" id="workflow">
+      <div class="panel-title">DETECTION WORKFLOW</div>
+
+      <div class="terminal">
+        <p>Attacker (Kali Linux)</p>
+        <p>↓ Brute Force (Hydra) / Reconnaissance (Nmap)</p>
+        <p>↓ Suricata IDS captures EVE JSON logs</p>
+        <p>↓ Wazuh SIEM triggers detection logic</p>
+        <p>↓ OpenSearch indexes and supports investigation</p>
+        <p>↓ Analyst validates alert and maps to MITRE ATT&CK</p>
+        <p>↓ Fail2Ban blocks malicious source IP</p>
+        <p>↓ Evidence documented for incident report and audit trail</p>
+      </div>
+    </section>
+
     <section class="panel" id="contact" style="margin-top:22px;">
       <div class="panel-title">CONTACT CHANNEL</div>
       <h2>Let’s Connect</h2>
-      <p>Open to SOC Analyst, Cloud Security, Cybersecurity Analyst, GRC, and Network Engineering opportunities.</p>
+      <p style="color:#00ff88;">
+        Actively pursuing SOC Analyst, Cloud Security, GRC, and Network Engineering roles — available immediately.
+      </p>
       <div class="actions">
         <a href="https://github.com/Arnold-Luna" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
@@ -686,7 +812,7 @@ body::before {
     </section>
 
     <div class="footer">
-      Built for detection. Documented for trust. Ready for the next mission.
+      Built for detection. Validated through evidence. Ready to reduce risk on day one.
     </div>
 
   </main>
