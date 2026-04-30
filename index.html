@@ -301,6 +301,29 @@ body::before {
   font-size: .86rem;
 }
 
+#terminalText {
+  color: var(--green);
+  font-family: Consolas, monospace;
+  line-height: 1.5;
+  font-size: .9rem;
+  white-space: pre-wrap;
+}
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  background: var(--green);
+  margin-left: 4px;
+  animation: blinkCursor .8s infinite;
+  vertical-align: -2px;
+}
+
+@keyframes blinkCursor {
+  0%, 45% { opacity: 1; }
+  46%, 100% { opacity: 0; }
+}
+
 /* ALERT FEED */
 .alert {
   display: grid;
@@ -598,22 +621,7 @@ body::before {
       <div class="panel">
         <div class="panel-title">ANALYST TERMINAL</div>
         <div class="terminal" id="terminal">
-          <p>&gt; About Me</p>
-          <p class="about-text">
-            Cybersecurity professional and U.S. Navy veteran with 20 years of experience operating in high-pressure, mission-critical environments.
-            Skilled in SOC operations, threat detection, incident response, and compliance frameworks.
-            Hands-on experience with SIEM tools, AWS cloud security, and building real-world labs that simulate enterprise security operations.
-            Strong foundation in network engineering including subnetting, routing, switching, analyzing traffic, and identifying anomalies using Wireshark and Nmap in lab-based environments.
-          </p>
-
-          <br />
-
-          <p>&gt; Initializing analyst workspace...</p>
-          <p>[OK] CySA+ loaded</p>
-          <p>[OK] AWS cloud controls mapped</p>
-          <p>[OK] SIEM detection mindset active</p>
-          <p>[OK] RMF / STIG evidence workflow ready</p>
-          <p>[POWER LEVEL] Security posture rising...</p>
+          <div id="terminalText"></div>
         </div>
       </div>
     </section>
@@ -837,6 +845,58 @@ if (card) {
     card.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
   });
 }
+
+// Animated analyst terminal
+const terminalText = document.getElementById("terminalText");
+
+const terminalLines = [
+  { text: "luna@alsec:~$ sudo su - luna\n", speed: 32 },
+  { text: "[sudo] password for luna: ********\n", speed: 34 },
+  { text: "Access granted...\n", speed: 24 },
+  { text: "Switching user context: luna\n\n", speed: 24 },
+
+  { text: "luna@alsec:~$ cat about-me.txt\n\n", speed: 32 },
+
+  { text: "> About Me\n", speed: 22 },
+  { text: "Cybersecurity professional and U.S. Navy veteran with 20 years of experience operating in high-pressure, mission-critical environments.\n", speed: 14 },
+  { text: "Skilled in SOC operations, threat detection, incident response, and compliance frameworks.\n", speed: 14 },
+  { text: "Hands-on experience with SIEM tools, AWS cloud security, and building real-world labs that simulate enterprise security operations.\n", speed: 14 },
+  { text: "Strong foundation in network engineering including subnetting, routing, switching, analyzing traffic, and identifying anomalies using Wireshark and Nmap in lab-based environments.\n\n", speed: 14 },
+
+  { text: "luna@alsec:~$ ./initialize-workspace.sh\n\n", speed: 32 },
+
+  { text: "> Initializing analyst workspace...\n", speed: 22 },
+  { text: "[OK] CySA+ loaded\n", speed: 20 },
+  { text: "[OK] AWS cloud controls mapped\n", speed: 20 },
+  { text: "[OK] SIEM detection mindset active\n", speed: 20 },
+  { text: "[OK] RMF / STIG evidence workflow ready\n", speed: 20 },
+  { text: "[POWER LEVEL] Security posture rising...\n", speed: 24 }
+];
+
+let lineIndex = 0;
+let charIndex = 0;
+
+function typeTerminal() {
+  if (!terminalText || lineIndex >= terminalLines.length) return;
+
+  const currentLine = terminalLines[lineIndex];
+
+  if (charIndex < currentLine.text.length) {
+    terminalText.innerHTML =
+      terminalText.innerHTML.replace('<span class="cursor"></span>', '') +
+      currentLine.text.charAt(charIndex) +
+      '<span class="cursor"></span>';
+
+    charIndex++;
+    setTimeout(typeTerminal, currentLine.speed);
+  } else {
+    lineIndex++;
+    charIndex = 0;
+    setTimeout(typeTerminal, 320);
+  }
+}
+
+window.addEventListener("load", typeTerminal);
 
 // Fake live SOC feed timestamps
 const times = document.querySelectorAll(".time");
